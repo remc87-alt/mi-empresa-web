@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mi Empresa — Arquitectura Comercial</title>
+<style>
+:root{--bg:#0c0b0a;--card:#171410;--card2:#201b14;--gold:#d6a85b;--gold2:#f2d18b;--cream:#f5efe4;--muted:#aaa092;--line:#604a2b}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--cream);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+body{background:radial-gradient(circle at 50% 0,rgba(214,168,91,.13),transparent 32rem),#0c0b0a}
+.wrap{max-width:1200px;margin:auto;padding:14px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.brand b{letter-spacing:.08em}.brand small{display:block;color:#81786d;font-size:9px;letter-spacing:.1em;margin-top:3px}
+button{border:1px solid #68502d;background:#1a1610;color:#f6e7c8;border-radius:999px;padding:9px 12px;font-weight:800;font-size:11px}
+button.on{background:linear-gradient(#ebc77f,#bd8a3e);color:#1a1208}
+.intro{text-align:center;padding:12px 8px 18px}.intro .ey{color:#c8a96f;font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.intro h1{font-size:clamp(28px,7vw,48px);line-height:1;margin:9px 0}.intro h1 span{color:var(--gold2)}
+.intro p{color:#b6ab9d;max-width:680px;margin:auto;font-size:13px;line-height:1.45}
+.map{position:relative;border:1px solid #4b3a25;border-radius:24px;background:linear-gradient(180deg,#15120e,#0f0e0c);padding:18px 14px 20px;overflow:hidden}
+.map:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 32%,rgba(214,168,91,.08),transparent 35%);pointer-events:none}
+.flowline{position:absolute;left:50%;top:104px;bottom:88px;width:2px;transform:translateX(-50%);background:#49371f;overflow:hidden}
+.flowline:after{content:"";position:absolute;left:-2px;width:6px;height:55px;border-radius:99px;background:linear-gradient(transparent,#f2d18b,transparent);box-shadow:0 0 16px #d6a85b;animation:travel 2.2s linear infinite}
+@keyframes travel{from{top:-60px}to{top:100%}}
+.topnode,.brain,.result{position:relative;z-index:2;margin:auto;text-align:center;border:1px solid #765a32;background:linear-gradient(145deg,#201b14,#14110d);border-radius:16px;padding:12px;max-width:620px}
+.topnode{margin-bottom:12px}.topnode b,.brain b,.result b{font-size:15px}.topnode p,.brain p,.result p{font-size:10.5px;color:#aaa092;margin:4px 0 0}
+.brain{margin-top:10px;border-color:#a47b3e;box-shadow:0 0 24px rgba(214,168,91,.08)}
+.brain .orb{width:46px;height:46px;border:1px solid #bd8d46;border-radius:50%;display:grid;place-items:center;margin:0 auto 7px;font-size:21px;animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 28px rgba(242,209,139,.35);transform:scale(1.06)}}
+.caps{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px auto 16px;max-width:860px}
+.cap{background:#17130f;border:1px solid #4d3d28;border-radius:13px;padding:9px;text-align:center;cursor:pointer;transition:.2s}
+.cap:active,.cap.active{border-color:#d6a85b;background:#211a10;transform:scale(.98)}
+.cap i{font-style:normal;font-size:18px}.cap b{display:block;font-size:10.5px;margin-top:4px}.cap small{display:block;color:#81786d;font-size:8.5px;margin-top:2px}
+.label{text-align:center;color:#aa8a53;font-size:8.5px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin:5px 0 8px;position:relative;z-index:2}
+.factory{position:relative;z-index:2;display:grid;grid-template-columns:repeat(8,1fr);gap:6px;max-width:1040px;margin:auto}
+.step{position:relative;min-height:86px;background:#18140f;border:1px solid #584329;border-radius:13px;padding:8px 4px;text-align:center;cursor:pointer;transition:.22s}
+.step:after{content:"›";position:absolute;right:-7px;top:31px;color:#a87c3d;z-index:3}.step:last-child:after{display:none}
+.step .n{width:20px;height:20px;border-radius:50%;border:1px solid #73552e;color:#cba866;display:grid;place-items:center;margin:auto;font-size:7px}
+.step .ico{font-size:17px;margin:5px 0 2px}.step b{display:block;font-size:9.5px}.step small{font-size:7.5px;color:#81786d}
+.step.active{border-color:#f0c976;background:#261d10;box-shadow:0 0 20px rgba(214,168,91,.2);transform:translateY(-2px)}
+.result{margin-top:16px}.metrics{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:8px}.metric{border:1px solid #443522;border-radius:999px;padding:5px 7px;font-size:8px;color:#b9aa91}
+.detail{display:none;position:relative;z-index:5;margin:10px auto 0;max-width:860px;background:#211b13;border:1px solid #8d6937;border-radius:14px;padding:11px 13px}
+.detail.show{display:block;animation:pop .2s ease}@keyframes pop{from{opacity:0;transform:translateY(-4px)}}
+.detail b{color:#f0cf8a;font-size:11px}.detail p{margin:4px 0 0;color:#b8ad9f;font-size:10px;line-height:1.4}
+.hint{text-align:center;color:#746b5f;font-size:8.5px;margin-top:10px;position:relative;z-index:2}
+footer{text-align:center;color:#675f55;font-size:8px;padding:15px 0}
+@media(max-width:700px){
+ .wrap{padding:8px}.intro{padding:7px 5px 12px}.intro p{font-size:11px}
+ .map{padding:12px 8px 14px;border-radius:18px}
+ .topnode,.brain,.result{padding:9px;max-width:96%}.topnode b,.brain b,.result b{font-size:12px}.topnode p,.brain p,.result p{font-size:8.5px}
+ .brain .orb{width:38px;height:38px;font-size:18px}
+ .caps{grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 0 10px}
+ .cap{padding:6px 2px}.cap i{font-size:14px}.cap b{font-size:7.8px}.cap small{display:none}
+ .factory{grid-template-columns:repeat(4,1fr);gap:4px}
+ .step{min-height:68px;padding:5px 2px}.step:nth-child(4):after{display:none}
+ .step .n{width:17px;height:17px;font-size:6px}.step .ico{font-size:13px;margin:3px}.step b{font-size:7.7px}.step small{display:none}
+ .step:after{right:-5px;top:24px;font-size:11px}
+ .result{margin-top:10px}.metrics{gap:3px}.metric{font-size:6.8px;padding:4px 5px}
+ .flowline{top:83px;bottom:65px}
+ .detail{margin-top:7px;padding:8px}.detail b{font-size:9px}.detail p{font-size:8px}
+ .hint{font-size:7px;margin-top:6px}
+}
+@media(max-width:390px){header button{padding:7px 9px}.brand b{font-size:12px}.brand small{font-size:7px}.intro h1{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.flowline:after,.brain .orb{animation-duration:5s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><b>MI EMPRESA</b><small>nombre provisional</small></div><button id="demo" class="on">▶ Ver flujo</button></header>
+<section class="intro"><div class="ey">Inteligencia aplicada al negocio</div><h1>De información a <span>resultados.</span></h1><p>Entendemos cómo funciona tu negocio, encontramos oportunidades y convertimos lo aprendido en mejoras concretas.</p></section>
+<section class="map">
+<div class="flowline"></div>
+<div class="topnode" data-title="Tu empresa" data-text="Todo comienza con personas, procesos, documentos, sistemas, datos y objetivos reales."><b>🏢 TU EMPRESA</b><p>Personas · Procesos · Datos · Sistemas · Objetivos</p></div>
+<div class="brain" data-title="Inteligencia al servicio de tu negocio" data-text="Comprende el contexto, conecta la información necesaria y coordina el trabajo para convertir una necesidad en una solución."><div class="orb">🧠</div><b>INTELIGENCIA AL SERVICIO DE TU NEGOCIO</b><p>Comprende · conecta · coordina · mejora</p></div>
+<div class="caps">
+ <div class="cap" data-title="Entiende tu negocio" data-text="Ordena información y procesos para comprender cómo funciona realmente."><i>⌕</i><b>Entiende</b><small>tu negocio</small></div>
+ <div class="cap" data-title="Trabaja con tus datos" data-text="Usa información real para apoyar decisiones y reducir suposiciones."><i>▤</i><b>Datos</b><small>información real</small></div>
+ <div class="cap" data-title="Automatiza procesos" data-text="Simplifica tareas repetitivas y procesos manuales cuando tiene sentido hacerlo."><i>⚙</i><b>Automatiza</b><small>procesos</small></div>
+ <div class="cap" data-title="Aprende y mejora" data-text="Mide resultados y utiliza lo aprendido para mejorar el siguiente ciclo."><i>↻</i><b>Mejora</b><small>continuamente</small></div>
+</div>
+<div class="label">La fábrica · un ciclo continuo</div>
+<div class="factory" id="factory">
+ <div class="step" data-title="Recolecta" data-text="Reúne la información relevante."><div class="n">01</div><div class="ico">📥</div><b>Recolecta</b><small>información</small></div>
+ <div class="step" data-title="Entiende" data-text="Ordena e interpreta lo que ocurre hoy."><div class="n">02</div><div class="ico">🔎</div><b>Entiende</b><small>el contexto</small></div>
+ <div class="step" data-title="Analiza" data-text="Observa relaciones, causas y restricciones."><div class="n">03</div><div class="ico">🧩</div><b>Analiza</b><small>el sistema</small></div>
+ <div class="step" data-title="Detecta" data-text="Encuentra riesgos, brechas y oportunidades."><div class="n">04</div><div class="ico">⚠</div><b>Detecta</b><small>oportunidades</small></div>
+ <div class="step" data-title="Diseña" data-text="Define una solución mejor y adecuada al negocio."><div class="n">05</div><div class="ico">✎</div><b>Diseña</b><small>la solución</small></div>
+ <div class="step" data-title="Implementa" data-text="Convierte la solución en un cambio real."><div class="n">06</div><div class="ico">⚙</div><b>Implementa</b><small>pone en marcha</small></div>
+ <div class="step" data-title="Mide" data-text="Comprueba el efecto conseguido con resultados observables."><div class="n">07</div><div class="ico">📊</div><b>Mide</b><small>resultados</small></div>
+ <div class="step" data-title="Aprende" data-text="Usa la evidencia obtenida para mejorar el siguiente ciclo."><div class="n">08</div><div class="ico">↻</div><b>Aprende</b><small>y vuelve a mejorar</small></div>
+</div>
+<div class="detail" id="detail"><b id="dt"></b><p id="dx"></p></div>
+<div class="result" data-title="Resultados para tu negocio" data-text="El objetivo es producir mejoras observables y medibles, no simplemente incorporar tecnología."><b>✓ RESULTADOS PARA TU NEGOCIO</b><div class="metrics"><span class="metric">◷ Ahorro de tiempo</span><span class="metric">● Menos costos</span><span class="metric">⚙ Procesos claros</span><span class="metric">↗ Productividad</span><span class="metric">✦ Mejores decisiones</span></div></div>
+<div class="hint">Toca cualquier bloque para conocer más · El flujo dorado representa el recorrido de la información</div>
+</section>
+<footer>Carbón + Dorado · versión compacta móvil</footer>
+</div>
+<script>
+const clickable=[...document.querySelectorAll('[data-title]')],detail=document.getElementById('detail'),dt=document.getElementById('dt'),dx=document.getElementById('dx');
+clickable.forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.active').forEach(x=>x.classList.remove('active'));el.classList.add('active');dt.textContent=el.dataset.title;dx.textContent=el.dataset.text;detail.classList.add('show');detail.scrollIntoView({behavior:'smooth',block:'nearest'})}));
+const steps=[...document.querySelectorAll('.step')];let timer=null,i=0;const btn=document.getElementById('demo');
+function stop(){if(timer)clearInterval(timer);timer=null;steps.forEach(s=>s.classList.remove('active'));btn.textContent='▶ Ver flujo'}
+function start(){stop();btn.textContent='■ Detener';i=0;steps[0].classList.add('active');timer=setInterval(()=>{steps.forEach(s=>s.classList.remove('active'));i++;if(i>=steps.length){stop();return}steps[i].classList.add('active')},700)}
+btn.addEventListener('click',()=>timer?stop():start());
+setTimeout(start,650);
+</script>
+</body></html>
