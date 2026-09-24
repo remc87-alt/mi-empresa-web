@@ -202,7 +202,7 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
   align-items:center;
   gap:10px;
   margin:14px auto;
-  flex-wrap:wrap;
+  
 }
 .controls button{
   border:1px solid #6c512d;
@@ -368,28 +368,464 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
   .stage-overview.active{animation:none}
   .example-view .ex-step,.example-view .ex-arrow,.example-view .ex-salida,.example-view .ex-close{animation:none;opacity:1}
 }
+
+/* Núcleo visual abstracto - orb inteligente */
+.orb-container{
+  position:absolute;
+  top:6px;
+  right:30px;
+  width:120px;
+  height:120px;
+  pointer-events:none;
+  opacity:.5;
+}
+@media(max-width:900px){
+  .orb-container{
+    width:80px;
+    height:80px;
+    top:4px;
+    right:14px;
+    opacity:.3;
+  }
+}
+.orb-core{
+  width:52px;
+  height:52px;
+  margin:0 auto;
+  position:relative;
+}
+@media(max-width:900px){.orb-core{width:36px;height:36px}}
+.orb-r1{
+  position:absolute;
+  inset:0;
+  border:1.5px solid #3a3020;
+  border-radius:50%;
+  animation:orbPulse1 4s ease-in-out infinite;
+}
+.orb-r2{
+  position:absolute;
+  inset:14%;
+  border:1px solid #5a4a2a;
+  border-radius:50%;
+  animation:orbPulse2 3.5s ease-in-out infinite;
+}
+.orb-r3{
+  position:absolute;
+  inset:28%;
+  border:1.5px solid #7a6a3a;
+  border-radius:50%;
+  animation:orbPulse3 3s ease-in-out infinite;
+}
+.orb-node{
+  position:absolute;
+  width:5px;
+  height:5px;
+  background:#d7a84f;
+  border-radius:50%;
+  box-shadow:0 0 6px #d7a84f;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation:orbNodeGlow 2.8s ease-in-out infinite;
+}
+.orb-pulse{
+  position:absolute;
+  width:6px;height:6px;
+  background:transparent;
+  border:1px solid #d7a84f44;
+  border-radius:50%;
+  top:50%;left:50%;
+  animation:orbTravel 3.5s ease-out infinite;
+}
+@keyframes orbPulse1{
+  0%,100%{transform:scale(1);opacity:.25}
+  50%{transform:scale(1.08);opacity:.45}
+}
+@keyframes orbPulse2{
+  0%,100%{transform:scale(.85);opacity:.2}
+  50%{transform:scale(1.02);opacity:.4}
+}
+@keyframes orbPulse3{
+  0%,100%{transform:scale(.7);opacity:.3}
+  50%{transform:scale(.9);opacity:.5}
+}
+@keyframes orbNodeGlow{
+  0%,100%{box-shadow:0 0 4px #d7a84f;opacity:.6}
+  50%{box-shadow:0 0 10px #f4d78f;opacity:1}
+}
+@keyframes orbTravel{
+  0%{transform:translate(-50%,-50%) scale(0.5);opacity:.7;border-width:1.5px}
+  100%{transform:translate(-50%,-50%) scale(5);opacity:0;border-width:.3px}
+}
+
+/* Animación de partículas de flujo */
+.flow-particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.flow-particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:#d7a84f;
+  border-radius:50%;
+  box-shadow:0 0 6px #d7a84f88;
+  opacity:0;
+}
+.flow-particle:nth-child(1){left:calc(6.25% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite}
+.flow-particle:nth-child(2){left:calc(18.75% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite .9s}
+.flow-particle:nth-child(3){left:calc(31.25% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 1.8s}
+.flow-particle:nth-child(4){left:calc(43.75% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 2.7s}
+.flow-particle:nth-child(5){left:calc(56.25% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 3.6s}
+.flow-particle:nth-child(6){left:calc(68.75% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 4.5s}
+.flow-particle:nth-child(7){left:calc(81.25% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 5.4s}
+.flow-particle:nth-child(8){left:calc(93.75% + 3.125%);top:-5px;animation:particleFlow 7s ease-in-out infinite 6.3s}
+@keyframes particleFlow{
+  0%{opacity:0;transform:translateY(-8px) scale(0.8)}
+  10%{opacity:.7}
+  85%{opacity:.4}
+  100%{opacity:0;transform:translateY(165px) scale(0.3)}
+}
+
+/* Indicador de mejora continua */
+.improvement-badge{
+  position:absolute;
+  bottom:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:8px;
+  color:var(--g2);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:700;
+  opacity:0;
+  transition:.3s;
+  white-space:nowrap;
+}
+.stage-overview.active .improvement-badge,
+.stage-overview:hover .improvement-badge{
+  opacity:.75;
+}
+.stage-overview:last-child .improvement-badge{
+  right:-16px;
+  left:auto;
+  bottom:-10px;
+  font-size:8px;
+  color:var(--g2);
+  opacity:.8;
+  animation:spin 5s linear infinite;
+}
+
+/* Etapa más legible */
+.stage-overview{
+  min-height:170px;
+  padding:16px 8px;
+}
+@media(max-width:1000px) and (min-width:701px){.stage-overview{min-height:145px}}
+@media(max-width:700px){.stage-overview{min-height:105px}}
+.stage-overview .stage-title{font-size:13px}
+.stage-overview.active .stage-title{font-size:14px}
+.stage-overview .stage-icon{width:44px;height:44px;font-size:22px}
+@media(max-width:1000px) and (min-width:701px){.stage-overview .stage-icon{width:40px;height:40px;font-size:20px}}
+@media(max-width:700px){.stage-overview .stage-icon{width:32px;height:32px;font-size:16px}}
+
+/* Stage detail con retorno y solución a medida */
+.stage-detail{
+  max-width:1100px;
+  margin:6px auto;
+}
+.back-btn{
+  width:28px;
+  height:28px;
+  border:1px solid #3a2e1f;
+  background:#0a0806;
+  color:var(--g2);
+  border-radius:50%;
+  cursor:pointer;
+  font-size:10px;
+  display:grid;
+  place-items:center;
+  transition:.2s;
+  flex-shrink:0;
+}
+.back-btn:hover{border-color:var(--g);background:#12100c}
+.back-btn svg{width:13px;height:13px}
+
+.sd-header-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* Icono de salida en detalle de etapa */
+.sd-salida-icon{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1a1610;
+  border:1px solid var(--g2);
+  color:var(--g2);
+  font-size:9px;
+}
+
+/* Etiqueta de solución *//* Solución a medida */
+.solution-branch{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border:1px solid #2a2218;
+  border-radius:7px;
+  background:#0a0806;
+}
+.solution-label{
+  font-size:9px;
+  color:var(--g);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.solution-btns{display:flex;gap:4px;margin-left:auto}
+.solution-btn{
+  padding:3px 8px;
+  border:1px solid #2a2218;
+  background:#11100c;
+  color:#b8a88a;
+  border-radius:9px;
+  font-size:9px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+.solution-btn:hover{border-color:var(--g);color:var(--g2);background:#161210}
+.solution-btn.active{
+  border-color:var(--g2);
+  color:var(--g2);
+  background:#1a1610;
+  box-shadow:0 0 8px #d7a84f22;
+}
+
+/* Ejemplo logística */
+.example-view{max-width:1100px;margin:6px auto}
+.example-header{display:flex;align-items:center;gap:8px;padding:10px 14px}
+.example-back{
+  width:25px;height:25px;
+  border:1px solid #2a2218;
+  background:#0a0806;
+  color:var(--g2);
+  border-radius:50%;
+  cursor:pointer;
+  font-size:10px;
+  display:grid;place-items:center;
+  transition:.2s;
+  flex-shrink:0;
+}
+.example-back:hover{border-color:var(--g);background:#12100c}
+.example-title{
+  color:var(--g2);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.example-sub{color:#6a5a4a;font-size:9.5px;margin-left:auto}
+.example-body{padding:8px 12px;max-height:320px;overflow-y:auto}
+.example-flow{display:flex;flex-direction:column;gap:4px}
+.example-step{
+  display:flex;align-items:flex-start;gap:7px;
+  padding:6px 10px;
+  border:1px solid #1e1a14;
+  border-radius:6px;
+  background:#0a0806;
+  opacity:0;
+  animation:fadeStep 0.35s ease-out forwards;
+}
+.example-step .ex-num{
+  width:18px;height:18px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  background:#11100c;
+  border:1px solid var(--g2);
+  color:var(--g2);
+  font-size:9px;
+  font-weight:700;
+  flex-shrink:0;
+}
+.example-step .ex-icon{font-size:14px;margin-right:5px;flex-shrink:0}
+.example-step .ex-text{font-size:11.5px;color:#d1c3ad;line-height:1.4;flex:1}
+.example-step .ex-text b{color:var(--g2);font-size:11.5px;display:block;margin-bottom:1px;font-weight:700}
+.example-arrow{
+  display:flex;justify-content:center;
+  color:var(--g2);font-size:10px;
+  padding:1px 0;opacity:0;
+  animation:fadeStep 0.25s ease-out forwards;
+}
+.example-step:nth-child(odd){animation-delay:calc(var(--i,0) * 0.12s)}
+.example-step:nth-child(even){animation-delay:calc(var(--i,0) * 0.12s + 0.08s)}
+.example-salida{
+  margin-top:6px;
+  border:1px solid #3a2e1f;
+  border-radius:6px;
+  background:radial-gradient(circle at 50% 0,#161210,#0a0806);
+  padding:7px;
+  text-align:center;
+  display:flex;align-items:center;gap:5px;
+  opacity:0;
+  animation:fadeStep 0.4s ease-out 1.1s forwards;
+}
+.example-salida-icon{
+  width:15px;height:15px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  background:#1a1610;
+  border:1px solid var(--g2);
+  color:var(--g2);
+  font-size:8px;
+}
+.example-salida b{color:var(--g2);font-size:11px;display:block;margin-bottom:1px}
+.example-salida span{font-size:10.5px;color:#c7b69d}
+.example-close-wrap{display:flex;justify-content:flex-end;padding:5px 12px;border-top:1px solid #1e1a14}
+.example-close{
+  padding:4px 10px;
+  border:1px solid #2a2218;
+  background:#0a0806;
+  color:var(--g2);
+  border-radius:10px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:600;
+  transition:.2s;
+}
+.example-close:hover{border-color:var(--g);color:var(--g2);background:#12100c}
+@keyframes fadeStep{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Iconos SVG */
+.sd-card-icon{
+  width:20px;height:20px;
+  border-radius:5px;
+  display:grid;place-items:center;
+  margin:0 auto 3px;
+  background:#11100c;
+  border:1px solid #1e1a14;
+  font-size:10px;
+  color:var(--g2);
+}
+.sd-card-icon svg{width:14px;height:14px}
+
+/* RETORNO visible en vista general */
+.overview-back-btn{
+  display:none;
+  width:44px;
+  height:32px;
+  border:1px solid #3a2e1f;
+  background:#0a0806;
+  color:var(--g2);
+  border-radius:12px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.06em;
+  transition:.2s;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  position:absolute;
+  top:-42px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+}
+.overview-back-btn:hover{border-color:var(--g);background:#12100c}
+.overview-back-btn svg{width:12px;height:12px}
+.overview-back-btn.visible{display:flex}
+@media(max-width:700px){.overview-back-btn{width:100%;height:28px;top:-36px;font-size:9px}}
+
+
+/* Nota de contexto en detalle */
+.focus-note{
+  font-size:10px;
+  color:#6a5a4a;
+  text-align:center;
+  margin-top:6px;
+  font-style:italic;
+  letter-spacing:.01em;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* Animación del bucle de mejora continua */
+.mejora-bucle{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:var(--g2);
+  font-size:9.5px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:0;
+  transition:.3s;
+}
+.stage-overview.active .mejora-bucle,
+.stage-overview:hover .mejora-bucle{
+  opacity:.85;
+}
+.mejora-bucle svg{width:10px;height:10px;animation:spin 2.5s linear infinite}
 </style>
-</head>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="svg-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M12 5l-7 7 7 7"/>
+  </symbol>
+  <symbol id="svg-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </symbol>
+  <symbol id="svg-loop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12a9 9 0 11-9-9 9 9 0 019 9z"/>
+    <path d="M12 6v3m0 0a3 3 0 01-3 3m3-3a3 3 0 00-3-3"/>
+  </symbol>
+</svg></head>
 <body>
 <div class="w">
 <header>
   <div class="brand">RM INTELLIGENCE<small>Transformación inteligente del negocio</small></div>
-  <button class="btn" id="btnExample">VER EJEMPLO</button>
+  <button class="btn" id="btnExample">VER EJEMPLO · LOGISTICA</button>
 </header>
 
 <section class="hero">
-  <small>INTELIGENCIA APLICADA AL NEGOCIO</small>
-  <h1>Entender · Validar · Diagnosticar · <span>Diseñar · Implementar · Medir · Aprender</span></h1>
-  <p>Entendemos cómo funciona tu negocio, encontramos dónde está el valor, diseñamos la solución, la implementamos, medimos el resultado y usamos lo aprendido para seguir mejorando.</p>
+  <div class="orb-container" aria-hidden="true">
+    <div class="orb-core">
+      <div class="orb-r1"></div>
+      <div class="orb-r2"></div>
+      <div class="orb-r3"></div>
+      <div class="orb-node"></div>
+      <div class="orb-pulse"></div>
+    </div>
+  </div>
+  <div class="purpose">INTELIGENCIA APLICADA AL NEGOCIO</div>
+  <h1>Entender · <span>Validar · Diagnosticar · Diseñar · Implementar · Medir · Aprender</span></h1>
+  <p class="sub">Entendemos tu negocio, encontramos valor, diseñamos soluciones a medida e implementamos mejoras medibles.</p>
 </section>
 
-<main class="board">
+<main class="board" style="position:relative;z-index:1">
   <div id="overviewView">
     <div class="title" style="text-align:center;font-size:13px;margin:14px 0">LA FÁBRICA · UN CICLO DE MEJORA CONTINUA</div>
+    <div class="flow-particles" aria-hidden="true" id="flowParticles"></div>
     <div class="flow-overview" id="flowOverview"></div>
     <div class="controls">
       <button class="nav-btn" id="prevBtn" title="Anterior (←)" disabled>←</button>
-      <div class="progress"><div class="bar" id="progressBar" style="width:0%"></div></div>
+      <div class="progress" style="position:relative;display:flex;align-items:center;gap:8px">
+      <span class="controls-label" style="font-size:9.5px;color:#6a5a4a;letter-spacing:.1em;text-transform:uppercase;font-weight:600;min-width:40px;text-align:right;display:block" id="progressLabel">0/8</span>
+      <div class="bar" id="progressBar" style="width:0\%;flex:1;height:3px;background:#1a1610;border-radius:2px;overflow:hidden;position:relative;border:1px solid #2a2218"></div>
+    </div>
       <button class="nav-btn" id="nextBtn" title="Siguiente (→)" disabled>→</button>
     </div>
     <div class="hint" style="margin-top:14px;text-align:center;color:#b6a68f;font-size:12px;line-height:1.4" id="infoBar">
@@ -398,10 +834,13 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
   </div>
 
   <div class="stage-detail" id="stageDetail">
-    <div class="sd-header">
+    <button class="back-btn" id="sdBackBtn" title="Volver a la vista general (ESC)" aria-label="Volver a la vista general">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="sd-header sd-header-right">
       <div class="sd-num" id="sdNum"></div>
       <div class="sd-title" id="sdTitle"></div>
-      <div class="sd-ico" id="sdIco"></div>
+      <div class="sd-icon" id="sdIco"></div>
     </div>
     <div class="sd-body">
       <div class="sd-desc" id="sdDesc"></div>
@@ -409,21 +848,43 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
       <div class="sd-cards" id="sdEntradas"></div>
       <div class="sd-label">LO QUE OCURRE</div>
       <div class="sd-cards" id="sdProceso"></div>
+      <div class="sd-label">SALIDA</div>
       <div class="sd-salida">
+        <div class="sd-salida-icon"></div>
         <b>SALIDA</b>
         <span id="sdSalida"></span>
+      </div>
+      <div class="focus-note" id="focusNote"></div>
+      <div class="solution-branch" id="solutionBlock" style="display:none">
+        <div class="solution-label">SOLUCIÓN A MEDIDA</div>
+        <div class="solution-btns">
+          <button class="solution-btn active" id="btnRecomendar">RECOMENDAR</button>
+          <button class="solution-btn" id="btnConstruir">CONSTRUIR</button>
+        </div>
+        <div class="focus-note" style="width:100%;margin-top:6px">Intervenciones focalizadas, sin reemplazar el core del negocio.</div>
       </div>
     </div>
   </div>
 
   <div class="example-view" id="exampleView">
-    <div class="ex-title">Caso empresarial · Ejemplo ilustrativo</div>
-    <div class="ex-flow" id="exFlow"></div>
-    <div class="ex-salida">
-      <b>RESULTADO</b>
-      <span>El mismo enfoque puede aplicarse a otros procesos.</span>
+    <button class="example-back" id="exBackBtn" title="Volver a la vista general" aria-label="Volver a la vista general">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="example-header">
+      <div class="example-title">VER EJEMPLO · LOGISTICA</div>
+      <div class="example-sub">Ciclo completo · Operación de pedidos</div>
     </div>
-    <button class="ex-close" id="exClose">VOLVER A LA VISTA GENERAL</button>
+    <div class="example-body">
+      <div class="example-flow" id="exFlow"></div>
+      <div class="example-salida">
+        <div class="example-salida-icon"></div>
+        <b>RESULTADO EN LOGISTICA</b>
+        <span>Cada ciclo de mejora detecta y resuelve fricciones reales del flujo de pedidos.</span>
+      </div>
+    </div>
+    <div class="example-close-wrap">
+      <button class="example-close" id="exClose">VOLVER A LA VISTA GENERAL</button>
+    </div>
   </div>
 </main>
 
@@ -557,17 +1018,18 @@ const stages = [
 ];
 
 const example = {
-  title:'Ejemplo ilustrativo · Operación de pedidos',
+  title:'VER EJEMPLO · LOGISTICA'},
   steps:[
-    {icon:'📋',text:'<b>Pedido recibido</b>Información distribuida entre correos, Excel y personas'},
-    {icon:'🔀',text:'<b>Procesamiento manual</b>Tareas repetitivas, registro en varios lugares'},
-    {icon:'⚠️',text:'<b>Cuello de botella</b>Espera por validación, retrabajo por datos inconsistentes'},
-    {icon:'🔍',text:'<b>Diagnóstico</b>Identificación de puntos de fricción y causa raíz'},
-    {icon:'🎯',text:'<b>Proceso rediseñado</b>Flujo único, trazabilidad, roles claros'},
-    {icon:'⚙️',text:'<b>Automatización / Integración</b>Conexión de sistemas, reducción de pasos manuales'},
-    {icon:'📊',text:'<b>Medición antes/después</b>Comparación de indicadores de operación'}
+    {icon:'📋',text:'<b>1. ENTENDER</b>Auditoría de flujo real de pedidos · entrevistas · documentos · sistemas · datos de ocupación'},
+    {icon:'🔀',text:'<b>2. VALIDAR</b>Confirmación de cómo funciona en la práctica · detección de vacíos entre lo documentado y la realidad'},
+    {icon:'⚠️',text:'<b>3. DIAGNOSTICAR</b>Cuellos de botella · retrabajos · puntos de fricción · causas raíz en el ciclo de vida del pedido'},
+    {icon:'🎯',text:'<b>4. DISEÑAR</b>Proceso objetivo · flujo claro · trazabilidad · roles definidos · indicadores de éxito'},
+    {icon:'⚙️',text:'<b>5. IMPLEMENTAR</b>Piloto controlado · integración con sistemas · automatización de pasos manuales repetitivos'},
+    {icon:'📈',text:'<b>6. MEDIR</b>Antes/después · tiempo de ciclo · errores · retrabajos · satisfacción de áreas involucradas'},
+    {icon:'🔄',text:'<b>7. APRENDER</b>Qué funcionó · qué mejorar · lecciones incorporadas al proceso'},
+    {icon:'↻',text:'<b>8. ITERAR</b>Nueva iteración sobre base mejorada · mejora continua del flujo de pedidos'}
   ],
-  salida:'El mismo enfoque puede aplicarse a otros procesos de su negocio.'
+  salida:'Flujo de pedidos con menor retrabajo, mayor trazabilidad, procesos claros, indicadores medibles, ciclo de mejora continuo.'
 };
 
 let currentView='overview',currentStage=-1;
@@ -596,7 +1058,7 @@ function buildOverview(){
     const el=document.createElement('div');
     el.className='stage-overview';
     el.dataset.index=i;
-    el.innerHTML=`<div class="num">${String(s.num).padStart(2,'0')}</div><div class="ico">${s.ico}</div><b>${s.title}</b><p>${s.desc.substring(0,55)}…</p>`;
+    el.innerHTML=`<div class="num">${String(s.num).padStart(2,'0')}</div><div class="ico">${s.ico}</div><b>${s.title}</b><p>${s.desc.substring(0,55)}…</p><div class="improvement-badge">MEJORA CONTINUA</div>`;
     el.addEventListener('click',()=>focusStage(i));
     flowOverview.appendChild(el);
   });
@@ -606,7 +1068,11 @@ function focusStage(index){
   currentStage=index;
   currentView='detail';
   const s=stages[index];
-  document.querySelectorAll('.stage-overview').forEach((el,i)=>el.classList.toggle('active',i===index));
+  document.querySelectorAll('.stage-overview').forEach((el,i)=>{
+    el.classList.toggle('active',i===index);
+    const badge=el.querySelector('.improvement-badge');
+    if(badge)badge.style.opacity=(i===index)?'0.75':'0';
+  });
   overviewView.style.display='none';
   stageDetail.classList.add('show');
   exampleView.classList.remove('show');
@@ -614,13 +1080,32 @@ function focusStage(index){
   sdTitle.textContent=s.title;
   sdIco.textContent=s.ico;
   sdDesc.textContent=s.desc;
-  sdEntradas.innerHTML=s.entradas.map(e=>`<div class="sd-card"><b>${e.b}</b>${e.t}</div>`).join('');
-  sdProceso.innerHTML=s.proceso.map(p=>`<div class="sd-card"><b>${p.b}</b>${p.t}</div>`).join('');
+  sdEntradas.innerHTML=s.entradas.map(e=>`<div class="sd-card"><div class="sd-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><b>${e.b}</b>${e.t}</div>`).join('');
+  sdProceso.innerHTML=s.proceso.map(p=>`<div class="sd-card"><div class="sd-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><b>${p.b}</b>${p.t}</div>`).join('');
   sdSalida.textContent=s.salida;
   updateProgress();
-  infoBar.textContent=`Etapa ${s.num}: ${s.title} · ← → para navegar · ESC para vista general · Ver ejemplo`;
+  infoBar.textContent=`Etapa ${s.num}: ${s.title} · ← → para navegar · ESC para vista general`;
   prevBtn.disabled=index===0;
   nextBtn.disabled=index===stages.length-1;
+  document.getElementById('sdBackBtn').style.display='flex';
+  // SOLUCIÓN A MEDIDA - solo en IMPLEMENTAR, DIAGNOSTICAR, DISEÑAR
+  const solBlock=document.getElementById('solutionBlock');
+  if(solBlock){solBlock.style.display=(index===4)?'flex':'none';}
+  // FOCUS NOTE - contexto de la etapa
+  const focusNote=document.getElementById('focusNote');
+  if(focusNote){
+    const notes={
+      0:'Observación sistemática de la realidad actual.',
+      1:'Construcción de un AS-IS compartido y validado.',
+      2:'Diagnóstico profundo: separar síntomas de causas.',
+      3:'Diseño del proceso objetivo con requerimientos claros.',
+      4:'Implementación controlada, sin reemplazar el core del negocio.',
+      5:'Seguimiento objetivo con indicadores definidos.',
+      6:'Lecciones incorporadas al sistema de mejora.',
+      7:'Reconexión al ciclo: ITERAR → ENTENDER de nuevo.'
+    };
+    focusNote.textContent=notes[index]||'';
+  }
 }
 
 function showOverview(){
@@ -633,6 +1118,7 @@ function showOverview(){
   progressBar.style.width='0%';
   prevBtn.disabled=true;
   nextBtn.disabled=true;
+  document.getElementById('sdBackBtn').style.display='none';
   infoBar.textContent='Haz clic en una etapa para profundizar · ← → para navegar · ESC para vista general';
 }
 
@@ -650,41 +1136,105 @@ function updateProgress(){
   }
 }
 
+function renderExample(){
+    const ev=document.getElementById('exampleView');
+    ev.innerHTML='';
+    ev.classList.add('show');
+    ev.style.animation='none';
+    void ev.offsetHeight;
+    ev.style.animation='fadeStep 0.5s ease-out';
+    const header=document.createElement('div');
+    header.className='example-header';
+    const backBtn=document.createElement('button');
+    backBtn.className='example-back';
+    backBtn.id='exBackBtn';
+    backBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>';
+    backBtn.title='Volver a la vista general';
+    backBtn.addEventListener('click',closeExample);
+    header.appendChild(backBtn);
+    const titleDiv=document.createElement('div');
+    titleDiv.className='example-title';
+    titleDiv.textContent=example.title;
+    header.appendChild(titleDiv);
+    const subDiv=document.createElement('div');
+    subDiv.className='example-sub';
+    subDiv.textContent='Ciclo completo · 8 etapas';
+    header.appendChild(subDiv);
+    ev.appendChild(header);
+    const body=document.createElement('div');
+    body.className='example-body';
+    const flow=document.createElement('div');
+    flow.className='example-flow';
+    example.steps.forEach((step,i)=>{
+      const stepEl=document.createElement('div');
+      stepEl.className='example-step';
+      stepEl.style.setProperty('--i',i);
+      stepEl.style.animationDelay=i*0.12+'s';
+      const num=document.createElement('div');
+      num.className='ex-num';
+      num.textContent=String(i+1).padStart(2,'0');
+      const iconDiv=document.createElement('div');
+      iconDiv.className='ex-icon';
+      iconDiv.textContent=step.icon;
+      const textDiv=document.createElement('div');
+      textDiv.className='ex-text';
+      textDiv.innerHTML=step.text;
+      stepEl.appendChild(num);
+      stepEl.appendChild(iconDiv);
+      stepEl.appendChild(textDiv);
+      flow.appendChild(stepEl);
+      if(i<example.steps.length-1){
+        const arrow=document.createElement('div');
+        arrow.className='example-arrow';
+        arrow.textContent='↓';
+        arrow.style.animationDelay=i*0.12+0.08+'s';
+        flow.appendChild(arrow);
+      }
+    });
+    body.appendChild(flow);
+    const salidaDiv=document.createElement('div');
+    salidaDiv.className='example-salida';
+    salidaDiv.style.animationDelay='1.1s';
+    const salidaIcon=document.createElement('div');
+    salidaIcon.className='example-salida-icon';
+    salidaIcon.textContent='✓';
+    const salidaB=document.createElement('b');
+    salidaB.textContent='RESULTADO EN LOGISTICA';
+    const salidaSpan=document.createElement('span');
+    salidaSpan.textContent=example.salida;
+    salidaDiv.appendChild(salidaIcon);
+    salidaDiv.appendChild(salidaB);
+    salidaDiv.appendChild(salidaSpan);
+    body.appendChild(salidaDiv);
+    ev.appendChild(body);
+    const closeWrap=document.createElement('div');
+    closeWrap.className='example-close-wrap';
+    const closeBtn=document.createElement('button');
+    closeBtn.className='example-close';
+    closeBtn.id='exClose';
+    closeBtn.textContent='VOLVER A LA VISTA GENERAL';
+    closeBtn.style.animationDelay='1.5s';
+    closeBtn.addEventListener('click',closeExample);
+    closeWrap.appendChild(closeBtn);
+    ev.appendChild(closeWrap);
+    currentView='example';
+    overviewView.style.display='none';
+    stageDetail.classList.remove('show');
+    infoBar.textContent='Ejemplo logístico · Ciclo completo · Volver con "VOLVER A LA VISTA GENERAL"';
+    prevBtn.disabled=true;
+    nextBtn.disabled=true;
+    progressBar.style.width='0%';
+    setTimeout(()=>{document.getElementById('exBackBtn').style.display='flex'},50);
+  }
+
 function showExample(){
-  currentView='example';
-  overviewView.style.display='none';
-  stageDetail.classList.remove('show');
-  exampleView.classList.add('show');
-  exampleView.style.animation='none';
-  void exampleView.offsetHeight;
-  exampleView.style.animation='fadeStep 0.4s ease-out';
-  exFlow.innerHTML='';
-  example.steps.forEach((step,i)=>{
-    const el=document.createElement('div');
-    el.className='ex-step';
-    el.style.animationDelay=(i*0.15)+'s';
-    el.innerHTML=`<div class="ex-icon">${step.icon}</div><div class="ex-text">${step.text}</div>`;
-    exFlow.appendChild(el);
-    if(i<example.steps.length-1){
-      const arrow=document.createElement('div');
-      arrow.className='ex-arrow';
-      arrow.style.animationDelay=(i*0.15+0.1)+'s';
-      arrow.textContent='↓';
-      exFlow.appendChild(arrow);
-    }
-  });
-  exClose.style.animation='none';
-  void exClose.offsetHeight;
-  exClose.style.animation='fadeStep 0.3s ease-out 1.5s forwards';
-  infoBar.textContent='Ejemplo ilustrativo · El mismo enfoque puede aplicarse a otros procesos · Volver con "Volver a la vista general"';
-  prevBtn.disabled=true;
-  nextBtn.disabled=true;
-  progressBar.style.width='0%';
+  renderExample();
 }
 
 function closeExample(){
   exampleView.classList.remove('show');
   showOverview();
+  document.getElementById('exBackBtn').style.display='none';
 }
 
 prevBtn.addEventListener('click',prevStage);
@@ -696,7 +1246,10 @@ document.addEventListener('keydown',(e)=>{
     return;
   }
   if(currentView==='detail'){
-    if(e.key==='Escape')showOverview();
+    if(e.key==='Escape'){
+      showOverview();
+      document.getElementById('sdBackBtn').style.display='none';
+    }
     else if(e.key==='ArrowRight')nextStage();
     else if(e.key==='ArrowLeft')prevStage();
   }
@@ -704,6 +1257,8 @@ document.addEventListener('keydown',(e)=>{
 
 btnExample.addEventListener('click',showExample);
 exClose.addEventListener('click',closeExample);
+document.getElementById('sdBackBtn').addEventListener('click',()=>{if(currentView==='detail')showOverview()});
+document.getElementById('exBackBtn').addEventListener('click',closeExample);
 
 buildOverview();
 </script>
