@@ -379,13 +379,12 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
 
 <section class="hero">
   <small>INTELIGENCIA APLICADA AL NEGOCIO</small>
-  <h1>Entendemos cómo funciona tu negocio y dónde está el valor. Diseñamos e implementamos soluciones a medida, medimos sus resultados y las mejoramos continuamente.</h1>
-  <p>Entendemos cómo funciona tu negocio, encontramos dónde está el valor, diseñamos la solución, la implementamos, medimos el resultado y usamos lo aprendido para seguir mejorando.</p>
+  <p style="color:#7a6e5e;text-align:center;font-size:13px;max-width:620px;margin:8px auto 0;line-height:1.5">Entendemos cómo funciona tu negocio y dónde está el valor. Diseñamos e implementamos soluciones a medida, medimos sus resultados y las mejoramos continuamente.</p>
 </section>
 
 <main class="board">
   <div id="overviewView">
-    <div class="title" style="text-align:center;font-size:13px;margin:14px 0">LA FÁBRICA · UN CICLO DE MEJORA CONTINUA</div>
+    <div class="title" style="text-align:center;font-size:13px;margin:14px 0">CÓMO TRABAJAMOS · DEL PROBLEMA AL VALOR MEDIBLE</div>
     <div class="flow-overview" id="flowOverview"></div>
     <div class="controls">
       <button class="nav-btn" id="prevBtn" title="Anterior (←)" disabled>←</button>
@@ -405,12 +404,12 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
     </div>
     <div class="sd-body">
       <div class="sd-desc" id="sdDesc"></div>
-      <div class="sd-label">ENTRADAS</div>
+      <div class="sd-label">QUÉ MIRAMOS</div>
       <div class="sd-cards" id="sdEntradas"></div>
-      <div class="sd-label">LO QUE OCURRE</div>
+      <div class="sd-label">QUÉ BUSCAMOS</div>
       <div class="sd-cards" id="sdProceso"></div>
       <div class="sd-salida">
-        <b>SALIDA</b>
+        <b>QUÉ LOGRAMOS</b>
         <span id="sdSalida"></span>
       </div>
     </div>
@@ -432,128 +431,128 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
 
 <script>
 const stages = [
-  {
-    num:1,ico:'🔎',title:'ENTENDER',
-    desc:'Comprendemos cómo funciona hoy el proceso, qué ocurre realmente y dónde están sus principales dificultades.',
-    entradas:[
-      {b:'📄 Documentos',t:'Procesos actuales, políticas, registros disponibles'},
-      {b:'👥 Entrevistas',t:'Personas clave, cómo trabajan en la práctica'},
-      {b:'📊 Datos',t:'Información cuantitable del negocio'},
-      {b:'⚙️ Sistemas',t:'Herramientas y tecnología en uso'},
-      {b:'👤 Personas',t:'Quién participa y cómo interacciona'}
-    ],
-    proceso:[
-      {b:'Observación',t:'Recopilación de evidencia tangible'},
-      {b:'Conversación',t:'Entendimiento del flujo real de trabajo'},
-      {b:'Ordenamiento',t:'Estructuración de la información obtenida'}
-    ],
-    salida:'AS-IS VERIFICABLE — una representación de la realidad actual, validada con las áreas involucradas.'
-  },
-  {
-    num:2,ico:'✅',title:'VALIDAR',
-    desc:'Contrastamos lo observado con las personas, los datos y la evidencia para asegurar que entendimos correctamente el proceso.',
-    entradas:[
-      {b:'AS-IS construido',t:'La representación del negocio actual'},
-      {b:'Personas involucradas',t:'Áreas que confirman o corrigen la visión'},
-      {b:'Evidencia disponible',t:'Documentos, datos, registros que apoyan'}
-    ],
-    proceso:[
-      {b:'Contraste',t:'Comparación con la percepción de las áreas'},
-      {b:'Detección de vacíos',t:'Identificación de lo no documentado o inconsistente'},
-      {b:'Corrección',t:'Ajuste hasta alcanzar consenso'}
-    ],
-    salida:'REALIDAD COMPARTIDA Y VALIDADA — todas las áreas coinciden en cómo funciona el negocio hoy.'
-  },
-  {
-    num:3,ico:'🩺',title:'DIAGNOSTICAR',
-    desc:'Identificamos qué problemas generan mayor impacto y dónde una intervención puede crear más valor para el negocio.',
-    entradas:[
-      {b:'AS-IS validado',t:'La realidad del negocio confirmada'},
-      {b:'Indicadores actuales',t:'Métricas existentes del proceso'},
-      {b:'Sistemas y datos',t:'Información de rendimiento disponible'}
-    ],
-    proceso:[
-      {b:'Análisis de sistema',t:'Relaciones y dependencias entre partes'},
-      {b:'Identificación de problemas',t:'Cuellos de botella, riesgos, retrabajos'},
-      {b:'Priorización',t:'Separar síntomas de causas reales'}
-    ],
-    salida:'OPORTUNIDADES PRIORIZADAS — problemas reales identificados, con causas y nivel de impacto.'
-  },
-  {
-    num:4,ico:'🎯',title:'DISEÑAR',
-    desc:'Transformamos las necesidades y requisitos del cliente en una solución diseñada específicamente para su realidad, sus procesos y sus objetivos.',
-    entradas:[
-      {b:'Oportunidades priorizadas',t:'Problemas y oportunidades identificadas'},
-      {b:'Conocimiento del negocio',t:'Cómo funciona y qué importa'},
-      {b:'Restricciones',t:'Tecnología, presupuesto, tiempo, personas'}
-    ],
-    proceso:[
-      {b:'Diseño del TO-BE',t:'Cómo debería funcionar el proceso mejorado'},
-      {b:'Definición de requerimientos',t:'Qué se necesita para llegar allí'},
-      {b:'Selección de enfoque',t:'Proceso, gestión, automatización, IA, integración'}
-    ],
-    salida:'SOLUCIÓN OBJETIVO + REQUERIMIENTOS — definición clara de la solución y lo necesario para implementarla.'
-  },
-  {
-    num:5,ico:'⚙️',title:'IMPLEMENTAR',
-    desc:'Ponemos la solución en operación, acompañamos a las personas y aseguramos que se integre al trabajo real del negocio.',
-    entradas:[
-      {b:'Diseño aprobado',t:'La solución y requerimientos definidos'},
-      {b:'Recursos disponibles',t:'Personas, herramientas, presupuesto'},
-      {b:'Capacidad de cambio',t:'Tolerancia al riesgo y ritmo de implementación'}
-    ],
-    proceso:[
-      {b:'Despliegue controlado',t:'Implementación por fases o pilotos'},
-      {b:'Integración',t:'Conexión con sistemas y procesos existentes'},
-      {b:'Automatización/IA',t:'Uso de tecnología donde aporta valor'}
-    ],
-    salida:'SOLUCIÓN OPERATIVA — la solución funcionando en el negocio, con personas y herramientas conectadas.'
-  },
-  {
-    num:6,ico:'📈',title:'MEDIR',
-    desc:'Medimos los resultados para comprobar el impacto real de la solución en el negocio.',
-    entradas:[
-      {b:'Solución operativa',t:'La implementación funcionando'},
-      {b:'Indicadores definidos',t:'Qué medir y cómo'},
-      {b:'Base de comparación',t:'El estado antes del cambio'}
-    ],
-    proceso:[
-      {b:'Seguimiento',t:'Observación continua de resultados'},
-      {b:'Comparación',t:'Antes vs Después del cambio'},
-      {b:'Análisis',t:'Interpretación de la diferencia'}
-    ],
-    salida:'EVIDENCIA DE VALOR — medición de lo que cambió: tiempo, errores, costo, productividad, calidad, ingresos.'
-  },
-  {
-    num:7,ico:'🔄',title:'APRENDER',
-    desc:'Analizamos los resultados para entender qué funcionó, qué puede mejorar y dónde aparecen nuevas oportunidades.',
-    entradas:[
-      {b:'Resultados medidos',t:'Evidencia de lo que pasó'},
-      {b:'Observaciones',t:'Lo que se nota en la operación'},
-      {b:'Feedback',t:'Percepción de las personas involucradas'}
-    ],
-    proceso:[
-      {b:'Reflexión',t:'Análisis de resultados y lecciones'},
-      {b:'Documentación',t:'Lo aprendido queda registrado'},
-      {b:'Nueva iteración',t:'El ciclo comienza de nuevo con más contexto'}
-    ],
-    salida:'MEJORA CONTINUA — aprendizaje incorporado, listo para la siguiente iteración sobre una realidad mejor conocida.'
-  },
-  {
-    num:8,ico:'↻',title:'MEJORA CONTINUA',
-    desc:'El aprendizaje se recircula. El negocio sigue cambiando y el ciclo se reinicia sobre una realidad más conocida. Mejora continua, no punto final.',
-    entradas:[
-      {b:'Lecciones aprendidas',t:'Lo que funcionó y lo que no'},
-      {b:'Nuevo contexto',t:'Cambios en el negocio o el entorno'},
-      {b:'Prioridades actualizadas',t:'Nuevas oportunidades o problemas'}
-    ],
-    proceso:[
-      {b:'Reentendimiento',t:'El ciclo vuelve a Entender, ahora con más base'},
-      {b:'Nueva validación',t:'Confirmar que la realidad aún representa'},
-      {b:'Nueva mejora',t:'Priorizar la siguiente oportunidad'}
-    ],
-    salida:'NUEVA ITERACIÓN — el ciclo continúa, mejorando el negocio de forma sostenida.'
-  }
+ {
+   num:1,ico:'🔎',title:'ENTENDER',
+   desc:'Comprendemos cómo funciona hoy el proceso en la práctica, no solo en el papel, y cómo lo viven quienes lo ejecutan.',
+   entradas:[
+     {b:'Personas',t:'Quién participa y cómo trabaja'},
+     {b:'Procesos',t:'Cómo fluye realmente el trabajo'},
+     {b:'Sistemas',t:'Herramientas y tecnología en uso'},
+     {b:'Datos',t:'Información disponible del negocio'},
+     {b:'Documentos',t:'Registros y antecedentes relevantes'}
+   ],
+   proceso:[
+     {b:'Cómo se trabaja realmente',t:'Lo que ocurre en la operación diaria'},
+     {b:'Tareas manuales',t:'Actividades que consumen tiempo y esfuerzo'},
+     {b:'Esperas y dificultades',t:'Puntos donde el trabajo se frena o complica'}
+   ],
+   salida:'Una visión clara de cómo opera hoy el negocio.'
+ },
+ {
+   num:2,ico:'✅',title:'VALIDAR',
+   desc:'Contrastamos lo observado con las personas, los datos y la evidencia para asegurar que partimos de una base correcta y compartida.',
+   entradas:[
+     {b:'Visión de cada área',t:'Cómo entiende el proceso cada equipo'},
+     {b:'Datos reales',t:'Información disponible para contrastar'},
+     {b:'Evidencia disponible',t:'Documentos y registros que respaldan la realidad'}
+   ],
+   proceso:[
+     {b:'Diferencias entre áreas',t:'Dónde existen visiones distintas'},
+     {b:'Información faltante',t:'Qué todavía necesitamos confirmar'},
+     {b:'Supuestos sin confirmar',t:'Qué requiere evidencia antes de avanzar'}
+   ],
+   salida:'Una visión confirmada y compartida de la realidad.'
+ },
+ {
+   num:3,ico:'🩺',title:'DIAGNOSTICAR',
+   desc:'Identificamos qué problemas generan mayor impacto y dónde una intervención puede crear más valor para el negocio.',
+   entradas:[
+     {b:'Problemas detectados',t:'Dificultades observadas en la operación'},
+     {b:'Indicadores actuales',t:'Cómo se comporta hoy el proceso'},
+     {b:'Tiempos y costos',t:'Dónde se consumen recursos'}
+   ],
+   proceso:[
+     {b:'Causas reales, no síntomas',t:'Qué origina realmente el problema'},
+     {b:'Mayor impacto',t:'Dónde existe más valor potencial'},
+     {b:'Prioridades',t:'Qué conviene abordar primero'}
+   ],
+   salida:'Oportunidades priorizadas según su impacto en el negocio.'
+ },
+ {
+   num:4,ico:'🎯',title:'DISEÑAR',
+   desc:'Transformamos las necesidades y requisitos del cliente en una solución diseñada específicamente para su realidad, sus procesos y sus objetivos.',
+   entradas:[
+     {b:'Oportunidades priorizadas',t:'Dónde está el valor identificado'},
+     {b:'Objetivos del negocio',t:'Qué resultado se quiere conseguir'},
+     {b:'Presupuesto, plazos y tecnología disponible',t:'Condiciones reales para diseñar'}
+   ],
+   proceso:[
+     {b:'Cómo debería funcionar el proceso',t:'La forma objetivo de operar'},
+     {b:'Qué se necesita',t:'Requisitos para hacerlo posible'},
+     {b:'Enfoque adecuado',t:'Proceso, automatización, integración o IA'}
+   ],
+   salida:'Una solución a medida, clara y lista para implementar.'
+ },
+ {
+   num:5,ico:'⚙️',title:'IMPLEMENTAR',
+   desc:'Ponemos la solución en operación, acompañamos a las personas y aseguramos que se integre al trabajo real del negocio.',
+   entradas:[
+     {b:'Solución aprobada',t:'Qué vamos a implementar'},
+     {b:'Equipos involucrados',t:'Quiénes participan en el cambio'},
+     {b:'Sistemas actuales',t:'Con qué debe convivir e integrarse'}
+   ],
+   proceso:[
+     {b:'Implementación por etapas',t:'Avance controlado hasta la operación'},
+     {b:'Conexión con lo que ya existe',t:'Integración sin reemplazar innecesariamente'},
+     {b:'Que las personas la adopten',t:'Incorporación al trabajo cotidiano'}
+   ],
+   salida:'Una solución funcionando en la operación diaria.'
+ },
+ {
+   num:6,ico:'📈',title:'MEDIR',
+   desc:'Medimos los resultados para comprobar el impacto real de la solución en el negocio.',
+   entradas:[
+     {b:'Situación antes',t:'Punto de partida para comparar'},
+     {b:'Situación después',t:'Resultado una vez implementada la solución'},
+     {b:'Indicadores acordados',t:'Cómo comprobaremos el impacto'}
+   ],
+   proceso:[
+     {b:'Tiempo',t:'Cambios en tiempos de ejecución y espera'},
+     {b:'Errores y costos',t:'Reducción de fallas y recursos consumidos'},
+     {b:'Calidad y productividad',t:'Mejoras obtenidas en la operación'}
+   ],
+   salida:'Evidencia concreta del valor generado.'
+ },
+ {
+   num:7,ico:'🔄',title:'APRENDER',
+   desc:'Analizamos los resultados para entender qué funcionó, qué puede mejorar y dónde aparecen nuevas oportunidades.',
+   entradas:[
+     {b:'Resultados medidos',t:'Evidencia de lo que ocurrió'},
+     {b:'Experiencia de los usuarios',t:'Cómo se vive la solución en la práctica'},
+     {b:'Lo que ocurre en la operación',t:'Comportamiento real después del cambio'}
+   ],
+   proceso:[
+     {b:'Qué funcionó',t:'Resultados que vale la pena conservar'},
+     {b:'Qué no',t:'Aspectos que todavía requieren mejora'},
+     {b:'Por qué',t:'Aprendizajes detrás de los resultados'}
+   ],
+   salida:'Decisiones basadas en evidencia, no en supuestos.'
+ },
+ {
+   num:8,ico:'↻',title:'MEJORA CONTINUA',
+   desc:'Usamos lo aprendido para mejorar la solución, abordar nuevas oportunidades y acompañar al negocio a medida que cambia.',
+   entradas:[
+     {b:'Aprendizajes',t:'Lo que los resultados nos enseñaron'},
+     {b:'Cambios del negocio',t:'Cómo evoluciona la realidad'},
+     {b:'Nuevas necesidades',t:'Oportunidades que aparecen con el tiempo'}
+   ],
+   proceso:[
+     {b:'Qué mejorar',t:'Dónde podemos generar un mejor resultado'},
+     {b:'Qué ajustar',t:'Qué debe evolucionar en la solución'},
+     {b:'Dónde generar más valor',t:'La siguiente oportunidad del negocio'}
+   ],
+   salida:'Una solución que evoluciona junto con el negocio.'
+ }
 ];
 
 const example = {
