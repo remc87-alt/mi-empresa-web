@@ -811,13 +811,13 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
     </div>
   </div>
   <div class="purpose">INTELIGENCIA APLICADA AL NEGOCIO</div>
-  <h1>Entender · <span>Validar · Diagnosticar · Diseñar · Implementar · Medir · Aprender</span></h1>
+  <h1>CICLO DE MEJORA <span>CONTINUA</span></h1>
   <p class="sub">Entendemos tu negocio, encontramos valor, diseñamos soluciones a medida e implementamos mejoras medibles.</p>
 </section>
 
 <main class="board" style="position:relative;z-index:1">
   <div id="overviewView">
-    <div class="title" style="text-align:center;font-size:13px;margin:14px 0">LA FÁBRICA · UN CICLO DE MEJORA CONTINUA</div>
+    <div class="title" style="text-align:center;font-size:13px;margin:14px 0">CICLO DE MEJORA CONTINUA</div>
     <div class="flow-particles" aria-hidden="true" id="flowParticles"></div>
     <div class="flow-overview" id="flowOverview"></div>
     <div class="controls">
@@ -828,9 +828,7 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
     </div>
       <button class="nav-btn" id="nextBtn" title="Siguiente (→)" disabled>→</button>
     </div>
-    <div class="hint" style="margin-top:14px;text-align:center;color:#b6a68f;font-size:12px;line-height:1.4" id="infoBar">
-      Haz clic en una etapa para profundizar · ← → para navegar · ESC para vista general
-    </div>
+
   </div>
 
   <div class="stage-detail" id="stageDetail">
@@ -1084,7 +1082,7 @@ function focusStage(index){
   sdProceso.innerHTML=s.proceso.map(p=>`<div class="sd-card"><div class="sd-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><b>${p.b}</b>${p.t}</div>`).join('');
   sdSalida.textContent=s.salida;
   updateProgress();
-  infoBar.textContent=`Etapa ${s.num}: ${s.title} · ← → para navegar · ESC para vista general`;
+  infoBar.textContent=`Etapa ${s.num}: ${s.title}`;
   prevBtn.disabled=index===0;
   nextBtn.disabled=index===stages.length-1;
   document.getElementById('sdBackBtn').style.display='flex';
@@ -1119,7 +1117,7 @@ function showOverview(){
   prevBtn.disabled=true;
   nextBtn.disabled=true;
   document.getElementById('sdBackBtn').style.display='none';
-  infoBar.textContent='Haz clic en una etapa para profundizar · ← → para navegar · ESC para vista general';
+  infoBar.textContent='';
 }
 
 function nextStage(){
