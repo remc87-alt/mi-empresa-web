@@ -89,9 +89,9 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
   transform:translateY(-2px);
 }
 .stage-overview .num{
-  margin:0 auto 5px;
-  width:28px;
-  height:28px;
+  margin:0 auto 4px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   display:grid;
   place-items:center;
@@ -100,18 +100,40 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
   font-size:10px;
 }
 .stage-overview .ico{
-  width:36px;
-  height:36px;
-  border-radius:10px;
+  width:28px;
+  height:28px;
+  border-radius:6px;
   display:grid;
   place-items:center;
-  font-size:20px;
   margin:5px auto;
-  background:#211a12;
-  border:1px solid #55452f;
+  background:transparent;
+  border:none;
+  color:var(--g);
+  transition:.2s;
 }
-.stage-overview b{font-size:12px;line-height:1.2;min-height:28px;display:block}
-.stage-overview p{font-size:10px;color:#d4c7b4;margin:4px 0 0;line-height:1.3}
+.stage-overview .ico svg{
+  width:100%;
+  height:100%;
+  display:block;
+  stroke:currentColor;
+  stroke-width:1.5;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.stage-overview:hover .ico,.stage-overview.active .ico{
+  color:var(--g2);
+}
+.stage-overview:hover,.stage-overview.active{
+  border-color:var(--g);
+  background:#1f170d;
+  box-shadow:0 0 0 1.5px var(--g),var(--shadow);
+  transform:translateY(-2px);
+  transition:.2s;
+}
+.flow-overview .stage-overview b{font-size:14px;font-weight:800;letter-spacing:.5px;line-height:1.2;min-height:28px;display:block}
+.flow-overview .stage-overview .num{font-size:12px}
+.flow-overview .stage-overview p{font-size:13px;line-height:1.3}
 
 .stage-detail{
   display:none;
@@ -149,12 +171,26 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
 }
 .stage-detail .sd-ico{
   margin-left:auto;
-  font-size:28px;
+  width:28px;
+  height:28px;
+  color:var(--g2);
+  display:grid;
+  place-items:center;
+}
+.stage-detail .sd-ico svg{
+  width:100%;
+  height:100%;
+  display:block;
+  stroke:currentColor;
+  stroke-width:1.5;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 .stage-detail .sd-body{display:grid;grid-template-columns:1fr;gap:12px}
 .stage-detail .sd-desc{
-  color:#d0c1aa;
-  font-size:14px;
+  color:#E6DAC4;
+  font-size:17px;
   line-height:1.5;
   background:#1a1610;
   border-radius:8px;
@@ -163,9 +199,9 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
 }
 .stage-detail .sd-label{
   color:var(--g);
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
-  letter-spacing:.1em;
+  letter-spacing:1.5px;
   text-transform:uppercase;
   margin-top:8px;
 }
@@ -179,22 +215,36 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
   border:1px solid #594529;
   background:#15110d;
   border-radius:10px;
-  padding:10px 12px;
-  font-size:13px;
+  padding:16px 18px;
+  font-size:14px;
   line-height:1.4;
   color:#d1c3ad;
 }
-.stage-detail .sd-card b{display:block;color:var(--g2);font-size:13px;margin-bottom:4px}
+.stage-detail .sd-card b{display:block;color:var(--g2);font-size:15px;font-weight:700;margin-bottom:4px}
 .stage-detail .sd-salida{
   margin-top:14px;
-  border:1px solid #a47a38;
+  border:1px solid var(--g);
   border-radius:10px;
-  background:radial-gradient(circle at 50% 0,#2a1e0e,#17130e 70%);
-  padding:12px 14px;
+  background:linear-gradient(135deg,#2a1e0e 0%,#1f160a 100%);
+  padding:16px 18px;
   text-align:center;
 }
-.stage-detail .sd-salida b{color:var(--g2);font-size:16px;display:block;margin-bottom:4px}
-.stage-detail .sd-salida span{font-size:13px;color:#c7b69d}
+.stage-detail .sd-salida b{
+  color:var(--g);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:6px;
+}
+.stage-detail .sd-salida span{
+  font-size:20px;
+  font-weight:600;
+  color:var(--g2);
+  display:block;
+  line-height:1.3;
+}
 
 .controls{
   display:flex;
@@ -329,7 +379,7 @@ button.btn:hover{border-color:var(--g);box-shadow:var(--shadow)}
   to{opacity:1;transform:translateY(0)}
 }
 
-footer{text-align:center;color:#817568;font-size:9px;padding:14px}
+footer{text-align:center;color:#A79477;font-size:12px;padding:14px}
 
 @keyframes pulse-glow{
   0%,100%{box-shadow:0 0 8px #d7a84f22}
@@ -353,9 +403,10 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
   .flow-overview{grid-template-columns:repeat(2,1fr);gap:10px 14px}
   .stage-overview:not(:last-child):after{content:'↓';right:50%;top:auto;bottom:-14px;transform:none}
   .stage-overview{min-height:110px;padding:8px 4px}
-  .stage-overview .ico{width:28px;height:28px;font-size:15px}
-  .stage-overview b{font-size:10px}
-  .stage-overview p{font-size:8.5px}
+  .stage-overview .ico{width:28px;height:28px}
+  .stage-overview .num{font-size:12px}
+  .stage-overview b{font-size:14px;font-weight:800;letter-spacing:.5px;min-height:28px;line-height:1.2}
+  .stage-overview p{font-size:13px;line-height:1.3}
   .stage-detail .sd-title{font-size:16px}
   .stage-detail .sd-body{grid-template-columns:1fr}
   .stage-detail .sd-cards{grid-template-columns:1fr}
@@ -373,13 +424,13 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
 <body>
 <div class="w">
 <header>
-  <div class="brand">RM INTELLIGENCE<small>Transformación inteligente del negocio</small></div>
+  <div class="brand">RM INTELLIGENCE<small style="color:#C6B79F;font-size:12px">Transformación inteligente del negocio</small></div>
   <button class="btn" id="btnExample">VER EJEMPLO</button>
 </header>
 
 <section class="hero">
-  <small>INTELIGENCIA APLICADA AL NEGOCIO</small>
-  <p style="color:#7a6e5e;text-align:center;font-size:13px;max-width:620px;margin:8px auto 0;line-height:1.5">Entendemos cómo funciona tu negocio y dónde está el valor. Diseñamos e implementamos soluciones a medida, medimos sus resultados y las mejoramos continuamente.</p>
+  <small style="font-size:15px;color:var(--g);font-weight:900;letter-spacing:.14em">INTELIGENCIA APLICADA AL NEGOCIO</small>
+  <p style="color:#EDE3D1;text-align:center;font-size:22px;font-weight:400;max-width:760px;margin:8px auto 0;line-height:1.5">Entendemos cómo funciona tu negocio y dónde está el valor. Diseñamos e implementamos soluciones a medida, medimos sus resultados y las mejoramos continuamente.</p>
 </section>
 
 <main class="board">
@@ -391,9 +442,7 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
       <div class="progress"><div class="bar" id="progressBar" style="width:0%"></div></div>
       <button class="nav-btn" id="nextBtn" title="Siguiente (→)" disabled>→</button>
     </div>
-    <div class="hint" style="margin-top:14px;text-align:center;color:#b6a68f;font-size:12px;line-height:1.4" id="infoBar">
-      Haz clic en una etapa para profundizar · ← → para navegar · ESC para vista general
-    </div>
+    <div class="hint" style="margin-top:14px;text-align:center;color:#b6a68f;font-size:0px;line-height:1" id="infoBar"></div>
   </div>
 
   <div class="stage-detail" id="stageDetail">
@@ -432,7 +481,7 @@ footer{text-align:center;color:#817568;font-size:9px;padding:14px}
 <script>
 const stages = [
  {
-   num:1,ico:'🔎',title:'ENTENDER',
+   num:1,ico:'search',title:'ENTENDER',
    desc:'Comprendemos cómo funciona hoy el proceso en la práctica, no solo en el papel, y cómo lo viven quienes lo ejecutan.',
    entradas:[
      {b:'Personas',t:'Quién participa y cómo trabaja'},
@@ -449,7 +498,7 @@ const stages = [
    salida:'Una visión clara de cómo opera hoy el negocio.'
  },
  {
-   num:2,ico:'✅',title:'VALIDAR',
+   num:2,ico:'shield-check',title:'VALIDAR',
    desc:'Contrastamos lo observado con las personas, los datos y la evidencia para asegurar que partimos de una base correcta y compartida.',
    entradas:[
      {b:'Visión de cada área',t:'Cómo entiende el proceso cada equipo'},
@@ -464,7 +513,7 @@ const stages = [
    salida:'Una visión confirmada y compartida de la realidad.'
  },
  {
-   num:3,ico:'🩺',title:'DIAGNOSTICAR',
+   num:3,ico:'stethoscope',title:'DIAGNOSTICAR',
    desc:'Identificamos qué problemas generan mayor impacto y dónde una intervención puede crear más valor para el negocio.',
    entradas:[
      {b:'Problemas detectados',t:'Dificultades observadas en la operación'},
@@ -479,7 +528,7 @@ const stages = [
    salida:'Oportunidades priorizadas según su impacto en el negocio.'
  },
  {
-   num:4,ico:'🎯',title:'DISEÑAR',
+   num:4,ico:'pencil-ruler',title:'DISEÑAR',
    desc:'Transformamos las necesidades y requisitos del cliente en una solución diseñada específicamente para su realidad, sus procesos y sus objetivos.',
    entradas:[
      {b:'Oportunidades priorizadas',t:'Dónde está el valor identificado'},
@@ -494,7 +543,7 @@ const stages = [
    salida:'Una solución a medida, clara y lista para implementar.'
  },
  {
-   num:5,ico:'⚙️',title:'IMPLEMENTAR',
+   num:5,ico:'rocket',title:'IMPLEMENTAR',
    desc:'Ponemos la solución en operación, acompañamos a las personas y aseguramos que se integre al trabajo real del negocio.',
    entradas:[
      {b:'Solución aprobada',t:'Qué vamos a implementar'},
@@ -509,7 +558,7 @@ const stages = [
    salida:'Una solución funcionando en la operación diaria.'
  },
  {
-   num:6,ico:'📈',title:'MEDIR',
+   num:6,ico:'chart-no-axes-combined',title:'MEDIR',
    desc:'Medimos los resultados para comprobar el impacto real de la solución en el negocio.',
    entradas:[
      {b:'Situación antes',t:'Punto de partida para comparar'},
@@ -524,7 +573,7 @@ const stages = [
    salida:'Evidencia concreta del valor generado.'
  },
  {
-   num:7,ico:'🔄',title:'APRENDER',
+   num:7,ico:'graduation-cap',title:'APRENDER',
    desc:'Analizamos los resultados para entender qué funcionó, qué puede mejorar y dónde aparecen nuevas oportunidades.',
    entradas:[
      {b:'Resultados medidos',t:'Evidencia de lo que ocurrió'},
@@ -539,7 +588,7 @@ const stages = [
    salida:'Decisiones basadas en evidencia, no en supuestos.'
  },
  {
-   num:8,ico:'↻',title:'MEJORA CONTINUA',
+   num:8,ico:'infinity',title:'MEJORA CONTINUA',
    desc:'Usamos lo aprendido para mejorar la solución, abordar nuevas oportunidades y acompañar al negocio a medida que cambia.',
    entradas:[
      {b:'Aprendizajes',t:'Lo que los resultados nos enseñaron'},
@@ -569,6 +618,21 @@ const example = {
   salida:'El mismo enfoque puede aplicarse a otros procesos de su negocio.'
 };
 
+const iconSVG = {
+search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg>',
+shield-check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 3 3 6-6"/></svg>',
+stethoscope:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M4.5 2.5c-1.5 0-3 1-3 3v.5h3z"/><path d="M19.5 2.5c1.5 0 3 1 3 3v.5h-3z"/><path d="M12 2c-2 0-4 1-4 3v4c0 2 2 3 4 3s4-1 4-3V5c0-2-2-3-4-3"/><path d="M12 10v6"/><path d="M9 16c0 1.5 2 3 3 3s3-1.5 3-3"/><path d="M15 16c0 1.5 2 3 3 3s3-1.5 3-3"/></svg>',
+pencil-ruler:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="m20 20-2.3-2.3L15 16.5 12 19.5l-1 1-2.5-2.5L4.5 14.5 3.5 13.5 5 12l1-1 3.5 3.5L9 12l1.5-1.5L15 8.5 18 11.5 16.5 13z"/><path d="M15 5.5l3 3-3 3"/></svg>',
+rocket:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M4.5 9.5L2 12l2.5 2.5c2 2 5.5 2.5 7.5 2.5 1.5 0 3-0.5 4-1.5 1-1 1.5-2.5 1.5-4 0-2-0.5-4-1.5-5.5-1-1.5-3-2.5-5-2.5-2 0-4 1-5 2.5L2 12l2.5-2.5z"/><path d="M17.5 6.5c0.5-0.5 1-1 1.5-1.5 0.5-0.5 1-1 1-1.5 0-0.5-0.5-1-1-1.5-0.5-0.5-1.5-0.5-2 0l-1 1 1 1c0.5 0.5 1 1 1 1.5 0 0.5-0.5 1-1 1.5-0.5 0.5-1 0.5-1.5 0l-1-1 1-1z"/></svg>',
+chart-no-axes-combined:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 5-5 3 3"/><path d="M7 8l4 4 3-3 5 5 3-3"/></svg>',
+graduation-cap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M20 14.5v-4c0-1.5-1-3-3-3h-2c-1.5 0-3 1-3 2.5v4c0 1.5 1 3 3 3h2c1.5 0 3-1 3-3z"/><path d="M9.5 6.5l-2-2 2-2c1-1 3-1 4 0"/><path d="M14.5 16.5l-2-2 2-2c1-1 3-1 4 0"/><path d="M5 10c0-2 1.5-4 3-4h2c1.5 0 3 1 3 3v4c0 2-1.5 4-3 4h-2c-1.5 0-3-1-3-3z"/></svg>',
+infinity:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;display:block"><path d="M7 12c0-3 2-5 7-5s7 2 7 5c0 3-2 5-7 5s-7-2-7-5z"/><path d="M12 7c3 0 5 2 5 5"/><path d="M12 17c-3 0-5-2-5-5"/></svg>'
+};
+
+function icoHTML(key){
+  return iconSVG[key] || '';
+}
+
 let currentView='overview',currentStage=-1;
 const flowOverview=document.getElementById('flowOverview');
 const stageDetail=document.getElementById('stageDetail');
@@ -595,7 +659,7 @@ function buildOverview(){
     const el=document.createElement('div');
     el.className='stage-overview';
     el.dataset.index=i;
-    el.innerHTML=`<div class="num">${String(s.num).padStart(2,'0')}</div><div class="ico">${s.ico}</div><b>${s.title}</b><p>${s.desc.substring(0,55)}…</p>`;
+    el.innerHTML=`<div class="num">${String(s.num).padStart(2,'0')}</div><div class="ico">${icoHTML(s.ico)}</div><b>${s.title}</b><p>${s.desc}</p>`;
     el.addEventListener('click',()=>focusStage(i));
     flowOverview.appendChild(el);
   });
@@ -611,13 +675,14 @@ function focusStage(index){
   exampleView.classList.remove('show');
   sdNum.textContent=String(s.num).padStart(2,'0');
   sdTitle.textContent=s.title;
-  sdIco.textContent=s.ico;
+  sdIco.innerHTML=icoHTML(s.ico);
   sdDesc.textContent=s.desc;
   sdEntradas.innerHTML=s.entradas.map(e=>`<div class="sd-card"><b>${e.b}</b>${e.t}</div>`).join('');
   sdProceso.innerHTML=s.proceso.map(p=>`<div class="sd-card"><b>${p.b}</b>${p.t}</div>`).join('');
   sdSalida.textContent=s.salida;
   updateProgress();
-  infoBar.textContent=`Etapa ${s.num}: ${s.title} · ← → para navegar · ESC para vista general · Ver ejemplo`;
+  overviewView.scrollIntoView({behavior:'smooth',block:'start'});
+  infoBar.textContent='';
   prevBtn.disabled=index===0;
   nextBtn.disabled=index===stages.length-1;
 }
@@ -632,7 +697,7 @@ function showOverview(){
   progressBar.style.width='0%';
   prevBtn.disabled=true;
   nextBtn.disabled=true;
-  infoBar.textContent='Haz clic en una etapa para profundizar · ← → para navegar · ESC para vista general';
+  infoBar.textContent='';
 }
 
 function nextStage(){
